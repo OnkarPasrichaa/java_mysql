@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: j-app
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: j-app
+  template:
+    metadata:
+      labels:
+        app: j-app
+    spec:
+      containers:
+        - name: j-app
+          image: onkarpasrichaa/java
+          env:
+            - name: DB_URL
+              value: jdbc:mysql://mysql-svc.db.svc.cluster.local:3306/java
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: "123456"
